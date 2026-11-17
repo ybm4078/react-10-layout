@@ -1,10 +1,9 @@
 import GlobalStyle from "./styles/GlobalStyle.ts";
 import styled from "styled-components";
-import { BrowserRouter, Route, Routes } from "react-router";
-import Home from "./pages/Home.tsx";
-import About from "./pages/About.tsx";
+import { RouterProvider} from "react-router";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
+import AppRouter from "./router/AppRouter.tsx";
 
 const Wrap = styled.div`
     min-height: 100dvh;
@@ -16,16 +15,11 @@ function App() {
     return (
         <>
             <GlobalStyle />
-            <BrowserRouter>
                 <Wrap>
                     <Header />
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<About />} />
-                    </Routes>
+                    <RouterProvider router={AppRouter()} />
                     <Footer />
                 </Wrap>
-            </BrowserRouter>
         </>
     );
 }
