@@ -2,6 +2,8 @@ import GlobalStyle from "./styles/GlobalStyle.ts";
 import { RouterProvider} from "react-router";
 import AppRouter from "./router/AppRouter.tsx";
 import {useState} from "react";
+import {ThemeProvider} from "styled-components";
+import { DarkTheme, LightTheme } from "./styles/theme.ts";
 
 function App() {
     const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -12,10 +14,10 @@ function App() {
         else setTheme("light");
     }
     return (
-        <>
+        <ThemeProvider theme={theme === "light" ? LightTheme : DarkTheme}>
             <GlobalStyle />
             <RouterProvider router={AppRouter(toggleTheme)} />
-        </>
+        </ThemeProvider>
     );
 }
 export default App;
