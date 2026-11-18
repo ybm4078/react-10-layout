@@ -6,7 +6,7 @@ const Head = styled.header`
     align-items: center;
     justify-content: space-between;
     height: 64px;
-    background-color: #f4f4f4;
+    background-color: ${props => props.theme.color.muted};
     padding: 10px;
 `;
 
@@ -18,6 +18,7 @@ const Nav = styled.nav`
 const Logo = styled.div`
     font-size: 20px;
     font-weight: 700;
+    color: ${props => props.theme.color.primary};
 `;
 
 const NavRight = styled.div`
