@@ -9,10 +9,10 @@ const Wrap = styled.div`
     flex-direction: column;
 `;
 
-function MainLayout() {
+function MainLayout({ toggleTheme }: { toggleTheme: () => void }) {
     return (
         <Wrap>
-            <Header />
+            <Header toggleTheme={toggleTheme} />
             <Outlet />
             <Footer />
         </Wrap>

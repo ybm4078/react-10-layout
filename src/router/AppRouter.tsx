@@ -6,25 +6,25 @@ import SignUp from "../pages/auth/SignUp.tsx";
 import AuthLayout from "../layouts/AuthLayout.tsx";
 import LogIn from "../pages/auth/LogIn.tsx";
 
-const AppRouter = () => {
-  const routes: RouteObject[] = [
-      {
-          element: <AuthLayout />,
-          path: "/auth",
-          children: [
-              { path: "login", element: <LogIn /> },
-              { path: "signup", element: <SignUp /> },
-          ],
-      },
-      {
-          element: <MainLayout />,
-          path: "/",
-          children: [
-              { index: true, element: <Home /> }, // Home => "/"
-              { path: "about", element: <About /> }, // About => "/about"
-          ],
-      },
-  ];
+const AppRouter = (toggleTheme: () => void )=> {
+    const routes: RouteObject[] = [
+        {
+            element: <AuthLayout />,
+            path: "/auth",
+            children: [
+                { path: "login", element: <LogIn /> },
+                { path: "signup", element: <SignUp /> },
+            ],
+        },
+        {
+            element: <MainLayout toggleTheme={toggleTheme} />,
+            path: "/",
+            children: [
+                { index: true, element: <Home /> }, // Home => "/"
+                { path: "about", element: <About /> }, // About => "/about"
+            ],
+        },
+    ];
     return createBrowserRouter(routes);
 };
 export default AppRouter;
