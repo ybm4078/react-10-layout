@@ -11,10 +11,10 @@ const Wrap = styled.div`
     color: ${props => props.theme.color.text};
 `;
 
-function AuthLayout({ toggleTheme }: { toggleTheme: () => void }) {
+function AuthLayout() {
     return (
         <Wrap>
-            <Header toggleTheme={toggleTheme} />
+            <Header />
             <Outlet />
             <Footer />
         </Wrap>
