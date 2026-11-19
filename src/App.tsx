@@ -3,7 +3,7 @@ import { RouterProvider} from "react-router";
 import AppRouter from "./router/AppRouter.tsx";
 import { useEffect, useState } from "react";
 import {ThemeProvider} from "styled-components";
-import { DarkTheme, LightTheme } from "./styles/theme.ts";
+import { DarkTheme, LightTheme, redTheme } from "./styles/theme.ts";
 
 function App() {
     // localStorage를 통해 프로그램이 꺼지더라도 데이터를 유지하겠다 라고 결정했다고 해서
@@ -14,15 +14,15 @@ function App() {
     // localStorage에서 getItem을 했었을 때 해당하는 키의 데이터가 없을 수 있음 => undefined
     //                 getItem을 했었을 때 key가 있더라고 그에 대한 값은 무조건 string
     // const [theme, setTheme] = useState<"light" | "dark">(localStorage.getItem("theme") === 'dark' ? "dark" : "light");
-    const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const [theme, setTheme] = useState<"light" | "dark" | "red" >(() => {
         const savedTheme = localStorage.getItem("theme");
-        return savedTheme === "dark" ? "dark" : "light";
+        return savedTheme === "light" ? "light" : savedTheme ==="dark" ? "dark" : "red";
     });
     // Props를 통해 setTheme를 내릴 것인가
 
     useEffect(() => {
         localStorage.setItem("theme", theme);
-    },[])
+    },[theme])
 
     const toggleTheme = ()=>  {
         // if (theme === "light") setTheme("dark");
@@ -34,14 +34,18 @@ function App() {
         // localStorage.setItem("theme", savedTheme);
         // useState에서 얻어진 set함수의 매개변수 자리엔 함수가 들어갈 수 있는데
         // 이 때, prev는  "현재 state에 저장된 값"이 들어옴
-        setTheme((prev) => { return prev === "dark" ? "light" : "dark" });
-
+        setTheme(prev => {
+            if (prev === "light") return "dark";
+            if (prev === "dark") return "red";
+            return "light";
+        });
     }
 
     return (
-        <ThemeProvider theme={theme === "light" ? LightTheme : DarkTheme}>
+        <ThemeProvider
+            theme={theme === "light" ? LightTheme : theme === "dark" ? DarkTheme : redTheme}>
             <GlobalStyle />
-            <RouterProvider router={AppRouter(toggleTheme)} />
+            <RouterProvider router={AppRouter(toggleTheme, theme, setTheme)} />
         </ThemeProvider>
     );
 }

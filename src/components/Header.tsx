@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Link } from "react-router";
 
 const Head = styled.header`
@@ -27,7 +27,15 @@ const NavRight = styled.div`
     gap: 20px;
 `;
 
+const Button = styled.button`
+    background: none;
+    border: none;
+    font-size: 24px;
+`;
+
 function Header({ toggleTheme }: { toggleTheme: () => void }) {
+    const theme = useTheme();
+
     return (
         <>
             <Head>
@@ -39,7 +47,7 @@ function Header({ toggleTheme }: { toggleTheme: () => void }) {
                 <NavRight>
                     <Link to={"/auth/login"}>로그인</Link>
                     <Link to={"/auth/signup"}>회원가입</Link>
-                    <button onClick={toggleTheme}>테마토글</button>
+                    <Button onClick={toggleTheme}>{theme.icon}</Button>
                 </NavRight>
             </Head>
         </>
