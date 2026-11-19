@@ -26,6 +26,6 @@ export const redTheme: DefaultTheme = {
         background: "#c2a1a1",
         text: "#000000",
         primary: "#6C63FF",
-        muted: "#ff0000",
+        muted: "#fe5151",
     },
 };
